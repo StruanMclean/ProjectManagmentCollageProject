@@ -14,7 +14,7 @@ COPY . .
 
 # Accept build arguments for environment variables
 ARG NEXT_PUBLIC_API_URL
-ENV NEXT_PUBLIC_API = "http://api:4000"
+ENV NEXT_PUBLIC_API = "http://192.168.10.13:4000"
 
 ENV NEXT_TYPESCRIPT_CHECK=0
 
