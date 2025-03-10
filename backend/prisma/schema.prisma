@@ -1,0 +1,38 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            Int     @id @default(autoincrement())
+  email         String  @unique
+  name          String
+  pfp           String  @default("")
+  password_hash String
+  salt          String
+  groups        Group[] @relation("GroupToUser")
+  Tasks         Tasks[] @relation("TasksToUser")
+}
+
+model Group {
+  id    Int     @id @default(autoincrement())
+  name  String
+  Tasks Tasks[] @relation("GroupToTasks")
+  user  User[]  @relation("GroupToUser")
+}
+
+model Tasks {
+  id              Int      @id @default(autoincrement())
+  groupid         Int
+  name            String
+  desc            String
+  status          String   @default("TO_COMPLETE")
+  to_be_done_by   DateTime
+  amount_complete Int      @default(0)
+  group           Group    @relation("GroupToTasks", fields: [groupid], references: [id])
+  users_assigned  User[]   @relation("TasksToUser")
+}
