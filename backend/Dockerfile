@@ -1,42 +1,29 @@
-FROM node:18-alpine AS development
+FROM node:18-alpine
 
 WORKDIR /usr/src/app
 
+# Copy package files
 COPY package*.json ./
-COPY prisma ./prisma/
 
+# Install dependencies
 RUN npm install
 
-# Generate Prisma client
+# Copy Prisma schema and generate client
+COPY prisma ./prisma/
 RUN npx prisma generate
 
+# Copy the rest of the application
 COPY . .
 
-RUN npm run build
-
-FROM node:18-alpine AS production
-
-ARG NODE_ENV=production
-ENV NODE_ENV=${NODE_ENV}
+# Environment variables
+ENV NODE_ENV="development"
 ENV DATABASE_URL="postgresql://postgres:postgres@db:5432/mydb?schema=public"
 ENV PORT=4000
 ENV JWT_SECRET="KerianRossIsOurPresident"
-ENV NODE_ENV="development"
-
-WORKDIR /usr/src/app
-
-COPY package*.json ./
-COPY prisma ./prisma/
-
-RUN npm install --only=production
-
-# Generate Prisma client for production
-RUN npx prisma generate
-
-COPY --from=development /usr/src/app/dist ./dist
-
-EXPOSE 4000
-
 ENV KAFKAJS_NO_PARTITIONER_WARNING=1
 
-CMD ["node", "dist/main"]
+# Expose port
+EXPOSE 4000
+
+# Simply run npm start
+CMD ["npm", "run", "start"]
