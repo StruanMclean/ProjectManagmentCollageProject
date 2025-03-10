@@ -3,7 +3,7 @@ import { Kafka } from 'kafkajs';
 
 const kafka = new Kafka({
   clientId: 'project',
-  brokers: ['localhost:9092']
+  brokers: ['kafka:9092']
 });
 
 @Injectable()
