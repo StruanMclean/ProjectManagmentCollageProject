@@ -30,7 +30,8 @@ services:
       context: ./website
       dockerfile: Dockerfile
       args:
-        - NEXT_PUBLIC_API_URL=http://api:4000
+        - NEXT_PUBLIC_API_URL=http://192.168.10.13:4000
+        - NEXT_PUBLIC_API=http://192.168.10.13:4000
     volumes:
       - ./website:/app
       - /app/node_modules
@@ -38,7 +39,8 @@ services:
     ports:
       - "3000:3000"
     environment:
-      - NEXT_PUBLIC_API_URL=http://api:4000
+      - NEXT_PUBLIC_API_URL=http://192.168.10.13:4000
+      - NEXT_PUBLIC_API=http://192.168.10.13:4000
     depends_on:
       - api
     restart: unless-stopped
