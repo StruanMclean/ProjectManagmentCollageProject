@@ -26,5 +26,4 @@ ENV KAFKAJS_NO_PARTITIONER_WARNING=1
 # Expose port
 EXPOSE 4000
 
-# Use a different start command that doesn't rely on NestJS CLI
-CMD ["npm", "run", "start:prod"]
+CMD ["npm", "run", "start"]
