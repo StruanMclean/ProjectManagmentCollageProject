@@ -5,8 +5,9 @@ WORKDIR /usr/src/app
 # Copy package files
 COPY package*.json ./
 
-# Install dependencies
+# Install dependencies and NestJS CLI globally
 RUN npm install
+RUN npm install -g @nestjs/cli
 
 # Copy Prisma schema and generate client
 COPY prisma ./prisma/
@@ -25,5 +26,5 @@ ENV KAFKAJS_NO_PARTITIONER_WARNING=1
 # Expose port
 EXPOSE 4000
 
-# Simply run npm start
-CMD ["npm", "run", "start"]
+# Use a different start command that doesn't rely on NestJS CLI
+CMD ["npm", "run", "start:prod"]
