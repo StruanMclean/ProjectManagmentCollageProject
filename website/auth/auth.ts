@@ -9,7 +9,7 @@ export function createAccount(
 ) {
     if (!loading) {
       setLoading(true)
-      fetch(process.env.NEXT_PUBLIC_API + "/users/create", {
+      fetch(window.location.origin.replace("3000", "4000") + "/users/create", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -46,7 +46,7 @@ export function Login(
 ) {    
     if (!loading) {
       setLoading(true)
-      fetch(process.env.NEXT_PUBLIC_API + "/users/login", {
+      fetch(window.location.origin.replace("3000", "4000") + "/users/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

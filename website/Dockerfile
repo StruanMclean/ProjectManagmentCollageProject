@@ -12,8 +12,6 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-ENV NEXT_PUBLIC_API = "http://192.168.10.13:4000"
-
 ENV NEXT_TYPESCRIPT_CHECK=0
 
 RUN npm run build

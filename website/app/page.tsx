@@ -33,7 +33,7 @@ export default function Home() {
 
   function getLists() {
     try {
-      fetch(process.env.NEXT_PUBLIC_API + "/data/get-groups", {
+      fetch(window.location.origin.replace("3000", "4000") + "/data/get-groups", {
         method: "GET",
         credentials: 'include',
         headers: {
@@ -77,7 +77,7 @@ export default function Home() {
     if (!groupName.trim()) return;
     
     setLoading(true);
-    fetch(process.env.NEXT_PUBLIC_API + "/data/create-group", {
+    fetch(window.location.origin.replace("3000", "4000") + "/data/create-group", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

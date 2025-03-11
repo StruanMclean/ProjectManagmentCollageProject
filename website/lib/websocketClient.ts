@@ -10,7 +10,7 @@ export const useWebSocket = (groupId: number) => {
   useEffect(() => {
     console.log("Setting up socket connection");
     
-    const socketInstance = io(process.env.NEXT_PUBLIC_API, {
+    const socketInstance = io(window.location.origin.replace("3000", "4000"), {
       transports: ['websocket'],
     });
 

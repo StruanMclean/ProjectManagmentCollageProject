@@ -12,7 +12,10 @@ async function bootstrap() {
   }));
 
   app.enableCors({
-    origin: '*',
+    origin: [
+      "http://192.168.10.13:3000",
+      "http://10.198.179.52:3000"
+    ],
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
     allowedHeaders: ['Content-Type', 'Authorization'],

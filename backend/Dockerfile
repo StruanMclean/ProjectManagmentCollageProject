@@ -9,20 +9,20 @@ COPY package*.json ./
 RUN npm install
 RUN npm install -g @nestjs/cli
 
-# Copy Prisma schema and generate client
-COPY prisma ./prisma/
-RUN npx prisma generate
-
-# Copy the rest of the application
-COPY . .
-
 # Environment variables
 ENV NODE_ENV="development"
-ENV DATABASE_URL="postgresql://postgres:postgres@db:5432/mydb?schema=public"
 ENV PORT=4000
 ENV JWT_SECRET="KerianRossIsOurPresident"
 ENV KAFKAJS_NO_PARTITIONER_WARNING=1
 
+
+# Copy Prisma schema and generate client
+COPY prisma ./prisma/
+RUN npx prisma db push
+RUN npx prisma generate
+
+# Copy the rest of the application
+COPY . .
 # Expose port
 EXPOSE 4000
 

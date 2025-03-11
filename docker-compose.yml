@@ -11,15 +11,9 @@ services:
       - /usr/src/app/node_modules
     ports:
       - "4000:4000"
-    environment:
-      - PORT=4000
-      - DATABASE_URL=postgresql://postgres:postgres@db:5432/mydb?schema=public
-      - JWT_SECRET=KerianRossIsOurPresident
-      - KAFKA_BROKERS=kafka:9092
-      - KAFKAJS_NO_PARTITIONER_WARNING=1
     depends_on:
-      - db
       - kafka
+      - zookeeper
     restart: unless-stopped
     networks:
       - app-network
@@ -29,38 +23,17 @@ services:
     build:
       context: ./website
       dockerfile: Dockerfile
-      args:
-        - NEXT_PUBLIC_API_URL=http://192.168.10.13:4000
-        - NEXT_PUBLIC_API=http://192.168.10.13:4000
     volumes:
       - ./website:/app
       - /app/node_modules
       - /app/.next
     ports:
       - "3000:3000"
-    environment:
-      - NEXT_PUBLIC_API_URL=http://192.168.10.13:4000
-      - NEXT_PUBLIC_API=http://192.168.10.13:4000
     depends_on:
       - api
     restart: unless-stopped
     networks:
       - app-network
-
-  db:
-    container_name: postgres
-    image: postgres:15-alpine
-    ports:
-      - "5432:5432"
-    environment:
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_USER=postgres
-      - POSTGRES_DB=mydb
-    volumes:
-      - postgres-data:/var/lib/postgresql/data
-    networks:
-      - app-network
-    restart: unless-stopped
 
   zookeeper:
     container_name: zookeeper
@@ -96,20 +69,11 @@ services:
       - kafka-data:/var/lib/kafka/data
     networks:
       - app-network
-
-  kafka-ui:
-    container_name: kafka-ui
-    image: provectuslabs/kafka-ui:latest
-    ports:
-      - "3928:3928"
-    environment:
-      KAFKA_CLUSTERS_0_NAME: local
-      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:9092
-      KAFKA_CLUSTERS_0_ZOOKEEPER: zookeeper:2181
-    depends_on:
-      - kafka
-    networks:
-      - app-network
+    healthcheck:
+      test: ["CMD-SHELL", "kafka-topics --bootstrap-server localhost:9092 --list"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
 networks:
   app-network:

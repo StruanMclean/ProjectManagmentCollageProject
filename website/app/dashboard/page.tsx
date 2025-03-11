@@ -94,7 +94,7 @@ export default function TasksPage() {
     setLoading(true);
 
     try {
-        const response = await fetch(process.env.NEXT_PUBLIC_API + '/data/get-tasks', {
+        const response = await fetch(window.location.origin.replace("3000", "4000") + '/data/get-tasks', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -133,7 +133,7 @@ export default function TasksPage() {
     const taskToBeDoneBy = taskDate ? taskDate.toISOString() : new Date().toISOString();
 
     try {
-        const response = await fetch(process.env.NEXT_PUBLIC_API + '/data/create-task', {
+        const response = await fetch(window.location.origin.replace("3000", "4000") + '/data/create-task', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -173,7 +173,7 @@ export default function TasksPage() {
     setFormError('');
 
     try {
-        const response = await fetch(process.env.NEXT_PUBLIC_API + '/data/invite-user-group', {
+        const response = await fetch(window.location.origin.replace("3000", "4000") + '/data/invite-user-group', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -203,7 +203,7 @@ export default function TasksPage() {
 
   const deleteTasks = async (): Promise<void> => {
     try {
-        const response = await fetch(process.env.NEXT_PUBLIC_API + '/data/delete-task', {
+        const response = await fetch(window.location.origin.replace("3000", "4000") + '/data/delete-task', {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",
@@ -295,7 +295,7 @@ export default function TasksPage() {
 
     const currentDateISOString: string = new Date().toISOString()
 
-    fetch(process.env.NEXT_PUBLIC_API + '/data/update-task', {
+    fetch(window.location.origin.replace("3000", "4000") + '/data/update-task', {
         method: "POST",
         headers: {
         "Content-Type": "application/json",
