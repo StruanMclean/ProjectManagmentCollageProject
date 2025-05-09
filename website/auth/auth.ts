@@ -9,7 +9,7 @@ export function createAccount(
 ) {
     if (!loading) {
       setLoading(true)
-      fetch(window.location.origin + ":4000" + "/users/create", {
+      fetch("http://67.205.163.69:4000" + "/users/create", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -46,7 +46,7 @@ export function Login(
 ) {    
     if (!loading) {
       setLoading(true)
-      fetch(window.location.origin.replace("3000", "4000") + "/users/login", {
+      fetch("http://67.205.163.69:4000" + "/users/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
