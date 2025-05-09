@@ -1,5 +1,6 @@
 import { Center, Loader } from '@mantine/core'
 import { createContext, useState, useEffect, useContext } from 'react'
+import { URL } from '@/auth/auth'
 
 export const AuthContext = createContext(null)
 
@@ -14,7 +15,7 @@ export const AuthProvider = ({ children }: any) => {
         setLoading(true)
 
         try {
-            fetch("http://67.205.163.69:4000" + "/auth/check", {
+            fetch(`${URL}/auth/check`, {
                 method: "GET",
                 credentials: 'include',
                 headers: {

@@ -1,5 +1,7 @@
 'use client'
 
+export const URL = "http://67.205.163.69:4000"
+
 export function createAccount(
     setLoading: any, 
     loading: boolean, 
@@ -9,7 +11,7 @@ export function createAccount(
 ) {
     if (!loading) {
       setLoading(true)
-      fetch("http://67.205.163.69:4000" + "/users/create", {
+      fetch(`${URL}/users/create`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -46,10 +48,12 @@ export function Login(
 ) {    
     if (!loading) {
       setLoading(true)
-      fetch("http://67.205.163.69:4000" + "/users/login", {
+      fetch(`${URL}/users/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Credentials": "true"
         },
         credentials: 'include',
         body: JSON.stringify({
