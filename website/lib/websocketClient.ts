@@ -1,4 +1,5 @@
 // lib/useWebSocket.ts
+import { WS_URL } from '@/auth/auth';
 import { useEffect, useState, useRef } from 'react';
 import { io, Socket } from 'socket.io-client';
 
@@ -10,7 +11,7 @@ export const useWebSocket = (groupId: number) => {
   useEffect(() => {
     console.log("Setting up socket connection");
     
-    const socketInstance = io(window.location.origin.replace("3000", "4000"), {
+    const socketInstance = io(WS_URL, {
       transports: ['websocket'],
     });
 

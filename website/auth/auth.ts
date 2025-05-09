@@ -1,6 +1,7 @@
 'use client'
 
 export const URL = "http://67.205.163.69:4000"
+export const WS_URL = "ws://67.205.163.69:443/"
 
 export function createAccount(
     setLoading: any, 

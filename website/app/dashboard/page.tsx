@@ -33,6 +33,7 @@ import { useDisclosure } from '@mantine/hooks';
 import { useSearchParams } from 'next/navigation';
 import { DragDropContext, Droppable, Draggable, DropResult } from '@hello-pangea/dnd';
 import { useWebSocket } from "@/lib/websocketClient";
+import { URL } from "@/auth/auth";
 
 interface Task {
   id: number;
@@ -94,7 +95,7 @@ export default function TasksPage() {
     setLoading(true);
 
     try {
-        const response = await fetch(window.location.origin.replace("3000", "4000") + '/data/get-tasks', {
+        const response = await fetch(`${URL}/data/get-tasks`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -133,7 +134,7 @@ export default function TasksPage() {
     const taskToBeDoneBy = taskDate ? taskDate.toISOString() : new Date().toISOString();
 
     try {
-        const response = await fetch(window.location.origin.replace("3000", "4000") + '/data/create-task', {
+        const response = await fetch(`${URL}/data/create-task`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -173,7 +174,7 @@ export default function TasksPage() {
     setFormError('');
 
     try {
-        const response = await fetch(window.location.origin.replace("3000", "4000") + '/data/invite-user-group', {
+        const response = await fetch(`${URL}/data/invite-user-group`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -203,7 +204,7 @@ export default function TasksPage() {
 
   const deleteTasks = async (): Promise<void> => {
     try {
-        const response = await fetch(window.location.origin.replace("3000", "4000") + '/data/delete-task', {
+        const response = await fetch(`${URL}/data/delete-task`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",
@@ -295,7 +296,7 @@ export default function TasksPage() {
 
     const currentDateISOString: string = new Date().toISOString()
 
-    fetch(window.location.origin.replace("3000", "4000") + '/data/update-task', {
+    fetch(`${URL}/data/update-task`, {
         method: "POST",
         headers: {
         "Content-Type": "application/json",

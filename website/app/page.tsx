@@ -22,6 +22,7 @@ import {
   IconUsers,
 } from '@tabler/icons-react';
 import { useDisclosure } from "@mantine/hooks";
+import { URL } from "@/auth/auth";
 
 export default function Home() {
   const [loading, setLoading] = useState(true);
@@ -33,7 +34,7 @@ export default function Home() {
 
   function getLists() {
     try {
-      fetch(window.location.origin.replace("3000", "4000") + "/data/get-groups", {
+      fetch(`${URL}/data/get-groups`, {
         method: "GET",
         credentials: 'include',
         headers: {
@@ -77,7 +78,7 @@ export default function Home() {
     if (!groupName.trim()) return;
     
     setLoading(true);
-    fetch(window.location.origin.replace("3000", "4000") + "/data/create-group", {
+    fetch(`${URL}/data/create-group`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
