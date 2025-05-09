@@ -9,7 +9,7 @@ export function createAccount(
 ) {
     if (!loading) {
       setLoading(true)
-      fetch(window.location.origin.replace("3000", "4000") + "/users/create", {
+      fetch(window.location.origin + ":4000" + "/users/create", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
