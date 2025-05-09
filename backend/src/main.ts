@@ -12,10 +12,9 @@ async function bootstrap() {
   }));
 
   app.enableCors({
-    origin: '*',
+    origin: ["http://67.205.163.69:443"],
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
-    allowedHeaders: '*',
   });
   
   app.use(cookieParser());
