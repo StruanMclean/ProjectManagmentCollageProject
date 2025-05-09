@@ -14,7 +14,7 @@ export const AuthProvider = ({ children }: any) => {
         setLoading(true)
 
         try {
-            fetch(window.location.origin.replace("3000", "4000") + "/auth/check", {
+            fetch("http://67.205.163.69:4000" + "/auth/check", {
                 method: "GET",
                 credentials: 'include',
                 headers: {
