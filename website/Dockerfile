@@ -14,6 +14,7 @@ COPY . .
 
 ENV NEXT_TYPESCRIPT_CHECK=0
 
+RUN npm install
 RUN npm run build
 
 # Production image, copy all the files and run next
