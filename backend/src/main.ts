@@ -12,7 +12,7 @@ async function bootstrap() {
   }));
 
   app.enableCors({
-    origin: ["http://67.205.163.69:443"],
+    origin: ["http://localhost:443"],
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
   });
